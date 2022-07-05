@@ -48,7 +48,7 @@ rFunction <- function(data,variab,rel,valu,time=FALSE)
       
     } else
     {
-      if (time==TRUE) fullrel <- eval(parse(text=paste0("as.POSIXct(data@data$",variab,") ",rel," as.POSIXct('",valu,"')"))) else fullrel <- eval(parse(text=paste0("as.POSIXct(data@data$",variab,") ",rel," as.POSIXct('",valu,"')")))
+      if (time==TRUE) fullrel <- eval(parse(text=paste0("as.POSIXct(data@data$",variab,") ",rel," as.POSIXct('",valu,"')"))) else fullrel <- eval(parse(text=paste0("data@data$",variab," ",rel," '",valu,"'")))
 
       if (any(fullrel)) #only do calculations if any locations fulfill the relation
       {
