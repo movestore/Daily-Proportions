@@ -12,7 +12,7 @@ This App first marks all locations that fulfill a user defined property (e.g. gr
 
 In addition, the cumulative daily duration is calcualted, where each track segment's duration is attributed to the start locations. The last location of each day is attributed with the time until the first location of the next day, if there are such data, else NA.
 
-For each calender date average proportion and duration is calcualted, where n.pts indicates that number of tracks providing data for this date.
+For each calender date average proportion and duration is calcualted, where n.pts indicates that number of tracks providing data for this date. Two final rows indicate the overall mean and standard deviations of proportion and duration with n.pts indicating the number of individual days where percentages were calculated.
 
 ### Input data
 moveStack in Movebank format

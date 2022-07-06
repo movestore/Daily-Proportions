@@ -91,9 +91,15 @@ rFunction <- function(data,variab,rel,valu,time=FALSE)
     perc_pts_avg <- apply(matrix(dates),1,function(x) mean(perc_sel$perc_pts[perc_sel$date==x]))
     perc_dur_avg <- apply(matrix(dates),1,function(x) mean(perc_sel$perc_dur[perc_sel$date==x]))
     
+    perc_pts_mean <- mean(perc_sel$perc_pts)
+    perc_pts_sd <- sd(perc_sel$perc_pts)
+    perc_dur_mean <- mean(perc_sel$perc_dur)
+    perc_dur_sd <- sd(perc_sel$perc_dur)
+    
     perc_sel_avg <- data.frame("trackId"="avg","date"=dates,"n.pts"=n.ids,"perc_pts"=perc_pts_avg,"perc_dur"=perc_dur_avg) 
-    perc_sel_list <- c(perc_sel_list,list(perc_sel_avg))
-    perc_sel <- rbind(perc_sel,perc_sel_avg)
+    perc_sel_meansd <- data.frame("trackId"=c("mean","sd"),"date"=c(NA,NA),"n.pts"=rep(dim(perc_sel)[1],2),"perc_pts"=c(perc_pts_mean,perc_pts_sd),"perc_dur"=c(perc_dur_mean,perc_dur_sd))
+    perc_sel_list <- c(perc_sel_list,list(perc_sel_avg),list(perc_sel_meansd))
+    perc_sel <- rbind(perc_sel,perc_sel_avg,perc_sel_meansd)
     write.csv(perc_sel,file=paste0(Sys.getenv(x = "APP_ARTIFACTS_DIR", "/tmp/"), "Daily_Proportions.csv"),row.names=FALSE)
     
     pdf(paste0(Sys.getenv(x = "APP_ARTIFACTS_DIR", "/tmp/"), "Daily_Proportions.pdf"),width=12,height=8)
