@@ -2,7 +2,7 @@ library(jsonlite)
 source("logger.R")
 source("RFunction.R")
 
-inputFileName = "App-Output Workflow_Instance_001__Filter_Data_by_Season__2022-07-04_11-29-59.rds" #important to set to NULL for movebank-download
+inputFileName = "stork_input_timelag2.rds" #important to set to NULL for movebank-download
 outputFileName = "output.rds"
 
 args <- list()
@@ -21,6 +21,7 @@ args[["variab"]] = "ground_speed"
 args[["rel"]] = ">"
 args[["valu"]] = 10
 args[["time"]] = FALSE
+args[["gap_adapt"]] = FALSE #use timelag or timelag2
 
 #################################################################
 #################################################################

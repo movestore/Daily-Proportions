@@ -14,6 +14,8 @@ In addition, the cumulative daily duration is calcualted, where each track segme
 
 For each calender date average proportion and duration is calcualted, where n.pts indicates that number of tracks providing data for this date. Two final rows indicate the overall mean and standard deviations of proportion and duration with n.pts indicating the number of individual days where percentages were calculated.
 
+It is necessary to include the Time Lag Between Locations App before this App in the workflow.
+
 ### Input data
 moveStack in Movebank format
 
@@ -33,6 +35,8 @@ moveStack in Movebank format
 `valu`: Value of the relation that the data set has to fullfill. In case of `rel` = 'is one of the following' commas have to be used to separate the possible values. In case of a timestamp parameter please use the timestamp format with year, month, day, hour, minute and second as in the example: '2021-06-23 09:34:00"
 
 `time`: Please tick this parameter if your selected variable is a timestamp type, so that the App can properly work with it.
+
+`last_loctime`: Select this option if your data were collected with a regular daily gap (e.g. no locations at night). This leads the App to calculate cumulative durations of the adapted `timelag2` that is weighting the last location before the gap with the median data resolution instead of the long gap time interval. Depending on your required data property and how the animal(s) behave during the gap (e.g. night) either one or the other might be sensible. Note that (in addition to the Time Lag Between Locations App) you need to add the Adapt Time Lag for Regular Gaps App to your workflow before, if you want to use this feature.
 
 ### Null or error handling:
 **Parameter `variab`:** If there is no individual variable with the name given here, an error will be returned.

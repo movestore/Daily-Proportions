@@ -3,9 +3,11 @@ library('foreach')
 library('data.table')
 library('ggplot2')
 
-rFunction <- function(data,variab,rel,valu,time=FALSE)
+rFunction <- function(data,variab,rel,valu,time=FALSE,gap_adapt=FALSE)
 {
   Sys.setenv(tz="UTC")
+  
+  if (gap_adapt==TRUE) TL <- "timelag2" else TL <- "timelag"
   
   if (is.null(variab) | is.null(rel) | is.null(valu)) logger.info("One of your parameters has not been set. This will lead to an error.")
   
@@ -36,7 +38,7 @@ rFunction <- function(data,variab,rel,valu,time=FALSE)
             
             perc_pts[i] <- length(which(dataid@data[[variab]] %in% valus))/length(dataid)
             
-            dur <- timeLag(dataidp,units="hours") 
+            dur <- dataidp@data[,TL]
             if (length(datai)<=max(ix_d)) dur <- c(dur,NA)
             perc_dur[i] <- sum(dur[which(dataid@data[[variab]] %in% valus)],na.rm=TRUE)/24 #not correct if flight detection in data collection
           }
@@ -70,7 +72,7 @@ rFunction <- function(data,variab,rel,valu,time=FALSE)
             
             perc_pts[i] <- eval(parse(text=paste0("length(which(dataid@data$",variab,rel,valu,"))/length(dataid)")))
             
-            dur <- timeLag(dataidp,units="hours") 
+            dur <- dataidp@data[,TL]
             if (length(datai)<=max(ix_d)) dur <- c(dur,NA)
             perc_dur[i] <- eval(parse(text=paste0("sum(dur[which(dataid@data$",variab,rel,valu,")],na.rm=TRUE)/24"))) #not correct if flight detection in data collection
           }
