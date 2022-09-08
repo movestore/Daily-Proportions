@@ -2,7 +2,7 @@ library(jsonlite)
 source("logger.R")
 source("RFunction.R")
 
-inputFileName = "stork_input_timelag2.rds" #important to set to NULL for movebank-download
+inputFileName = "App-Output Red_Kite_MPIAB_BW_2__Filter_Unrealistic_Values__2022-07-21_08-17-16.rds" #important to set to NULL for movebank-download
 outputFileName = "output.rds"
 
 args <- list()
@@ -17,10 +17,11 @@ args <- list()
 #    args[["password"]] = "any-password"
 
 # Add your arguments of your r function here
-args[["variab"]] = "ground_speed"
+args[["variab"]] = "ground.speed"
 args[["rel"]] = ">"
 args[["valu"]] = 10
 args[["time"]] = FALSE
+args[["midnight_adapt"]] = 2
 args[["gap_adapt"]] = FALSE #use timelag or timelag2
 
 #################################################################
