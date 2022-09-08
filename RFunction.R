@@ -34,14 +34,14 @@ rFunction <- function(data,variab,rel,valu,time=FALSE,midnight_adapt=0,gap_adapt
           {
             ix_d <- which(datum==datumi[i])
             dataid <- datai[ix_d]
-            if (length(datai)>max(ix_d)) dataidp <- datai[unique(c(ix_d,ix_d+1))] else dataidp <- dataid
+            # these are all locations during the day with timelag durations. durations that are accounted for by locations of the previous day are not included here. As high resolution is expected, that should not make a big differences.
             
             perc_pts[i] <- length(which(dataid@data[[variab]] %in% valus))/length(dataid)
             
             dur <- dataidp@data[,TL]
-            if (length(datai)<=max(ix_d)) dur <- c(dur,NA)
-            perc_dur[i] <- sum(dur[which(dataid@data[[variab]] %in% valus)],na.rm=TRUE)/sum(dur) #adapted to proportion of tracking time per day
-            track_dur[i] <- sum(dur) # tracking time per day (sum of timelags TL, same unit)
+
+            perc_dur[i] <- sum(dur[which(dataid@data[[variab]] %in% valus)],na.rm=TRUE)/sum(dur,na.rm=TRUE) #adapted to proportion of tracking time per day
+            track_dur[i] <- sum(dur,na.rm=TRUE) # tracking time per day (sum of timelags TL, same unit)
           }
           perc_seli <- data.frame("trackId"=rep(idi[1],length(datumi)),"date"=datumi,"n.pts"=as.numeric(table(datum)),perc_pts,perc_dur,track_dur)
         }
@@ -61,7 +61,7 @@ rFunction <- function(data,variab,rel,valu,time=FALSE,midnight_adapt=0,gap_adapt
           idi <- namesIndiv(datai)
           logger.info(idi)
           
-          datum <- as.Date(timestamps(datai) + midnight_adapt*3600) #shifts midnight by use definition
+          datum <- as.Date(timestamps(datai) + midnight_adapt*3600) #shifts midnight by user definition
           datumi <- unique(datum)
           perc_pts <- perc_dur <- track_dur <- numeric(length(datumi))
           
@@ -69,12 +69,12 @@ rFunction <- function(data,variab,rel,valu,time=FALSE,midnight_adapt=0,gap_adapt
           {
             ix_d <- which(datum==datumi[i])
             dataid <- datai[ix_d]
-            if (length(datai)>max(ix_d)) dataidp <- datai[unique(c(ix_d,ix_d+1))] else dataidp <- dataid
+            # these are all locations during the day with timelag durations. durations that are accounted for by locations of the previous day are not included here. As high resolution is expected, that should not make a big differences.
             
             perc_pts[i] <- eval(parse(text=paste0("length(which(dataid@data$",variab,rel,valu,"))/length(dataid)")))
             
             dur <- dataidp@data[,TL]
-            if (length(datai)<=max(ix_d)) dur <- c(dur,NA) #if this is not the end of the track add NA
+            
             perc_dur[i] <- eval(parse(text=paste0("sum(dur[which(dataid@data$",variab,rel,valu,")],na.rm=TRUE)/sum(dur,na.rm=TRUE)"))) #changed so that in relation to daily tracked time
             track_dur[i] <- sum(dur,na.rm=TRUE) # tracking time per day (sum of timelags TL, same unit)
           }

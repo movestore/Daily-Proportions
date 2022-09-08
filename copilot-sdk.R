@@ -19,7 +19,7 @@ args <- list()
 # Add your arguments of your r function here
 args[["variab"]] = "ground.speed"
 args[["rel"]] = ">"
-args[["valu"]] = 10
+args[["valu"]] = 5
 args[["time"]] = FALSE
 args[["midnight_adapt"]] = 2
 args[["gap_adapt"]] = FALSE #use timelag or timelag2
