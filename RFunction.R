@@ -38,7 +38,7 @@ rFunction <- function(data,variab,rel,valu,time=FALSE,midnight_adapt=0,gap_adapt
             
             perc_pts[i] <- length(which(dataid@data[[variab]] %in% valus))/length(dataid)
             
-            dur <- dataidp@data[,TL]
+            dur <- dataid@data[,TL]
 
             perc_dur[i] <- sum(dur[which(dataid@data[[variab]] %in% valus)],na.rm=TRUE)/sum(dur,na.rm=TRUE) #adapted to proportion of tracking time per day
             track_dur[i] <- sum(dur,na.rm=TRUE) # tracking time per day (sum of timelags TL, same unit)
@@ -73,7 +73,7 @@ rFunction <- function(data,variab,rel,valu,time=FALSE,midnight_adapt=0,gap_adapt
             
             perc_pts[i] <- eval(parse(text=paste0("length(which(dataid@data$",variab,rel,valu,"))/length(dataid)")))
             
-            dur <- dataidp@data[,TL]
+            dur <- dataid@data[,TL]
             
             perc_dur[i] <- eval(parse(text=paste0("sum(dur[which(dataid@data$",variab,rel,valu,")],na.rm=TRUE)/sum(dur,na.rm=TRUE)"))) #changed so that in relation to daily tracked time
             track_dur[i] <- sum(dur,na.rm=TRUE) # tracking time per day (sum of timelags TL, same unit)
