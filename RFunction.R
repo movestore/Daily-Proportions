@@ -90,11 +90,11 @@ rFunction <- function(data,variab,rel,valu,time=FALSE,midnight_adapt=0,gap_adapt
   
   if (exists("perc_sel")) #if calculations have been made
   {
-    dates <- unique(perc_sel$date)
-    n.ids <- as.numeric(table(perc_sel$date))
-    perc_pts_avg <- apply(matrix(dates),1,function(x) mean(perc_sel$perc_pts[perc_sel$date==x],na.rm=TRUE))
-    perc_dur_avg <- apply(matrix(dates),1,function(x) mean(perc_sel$perc_dur[perc_sel$date==x],na.rm=TRUE))
-    track_dur_avg <- apply(matrix(dates),1,function(x) mean(perc_sel$track_dur[perc_sel$date==x],na.rm=TRUE))
+    idvs <- unique(perc_sel$trackId)
+    n.ids <- as.numeric(table(perc_sel$trackId))
+    perc_pts_avg <- apply(matrix(idvs),1,function(x) mean(perc_sel$perc_pts[perc_sel$trackId==x],na.rm=TRUE))
+    perc_dur_avg <- apply(matrix(idvs),1,function(x) mean(perc_sel$perc_dur[perc_sel$trackId==x],na.rm=TRUE))
+    track_dur_avg <- apply(matrix(idvs),1,function(x) mean(perc_sel$track_dur[perc_sel$trackId==x],na.rm=TRUE))
     
     perc_pts_mean <- mean(perc_sel$perc_pts,na.rm=TRUE)
     perc_pts_sd <- sd(perc_sel$perc_pts,na.rm=TRUE)
@@ -103,9 +103,11 @@ rFunction <- function(data,variab,rel,valu,time=FALSE,midnight_adapt=0,gap_adapt
     track_dur_mean <- mean(perc_sel$track_dur,na.rm=TRUE)
     track_dur_sd <- sd(perc_sel$track_dur,na.rm=TRUE)
     
-    perc_sel_avg <- data.frame("trackId"="avg","date"=dates,"n.pts"=n.ids,"perc_pts"=perc_pts_avg,"perc_dur"=perc_dur_avg,"track_dur"=track_dur_avg) 
-    perc_sel_meansd <- data.frame("trackId"=c("mean","sd"),"date"=c(NA,NA),"n.pts"=rep(dim(perc_sel)[1],2),"perc_pts"=c(perc_pts_mean,perc_pts_sd),"perc_dur"=c(perc_dur_mean,perc_dur_sd),"track_dur"=c(track_dur_mean,track_dur_sd))
+    perc_sel_avg <- data.frame("trackId"=idvs,"date"="avg","n.pts"=n.ids,"perc_pts"=perc_pts_avg,"perc_dur"=perc_dur_avg,"track_dur"=track_dur_avg) 
+    perc_sel_meansd <- data.frame("trackId"=c("mean","sd"),"date"="avg","n.pts"=rep(dim(perc_sel)[1],2),"perc_pts"=c(perc_pts_mean,perc_pts_sd),"perc_dur"=c(perc_dur_mean,perc_dur_sd),"track_dur"=c(track_dur_mean,track_dur_sd))
     perc_sel_list <- c(perc_sel_list,list(perc_sel_avg),list(perc_sel_meansd))
+    perc_sel$date <- as.character(perc_sel$date)
+    
     perc_sel <- rbind(perc_sel,perc_sel_avg,perc_sel_meansd)
     write.csv(perc_sel,file=paste0(Sys.getenv(x = "APP_ARTIFACTS_DIR", "/tmp/"), "Daily_Proportions.csv"),row.names=FALSE)
     
