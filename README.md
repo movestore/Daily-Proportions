@@ -10,7 +10,7 @@ Filters your data according to a selected attribute and value and returns the da
 ## Documentation
 This App first marks all locations that fulfill a user defined property (e.g. ground speed > 10 m/s). Then it extracts the number of locations per day and track that this property is fulfilled. Sample sizes per day are added.
 
-In addition, the cumulative daily duration is calcualted, where each track segment's duration is attributed to the start locations. The last location of each day is attributed with the time until the first location of the next day, if there are such data, else NA.
+In addition, the cumulative daily duration is calcualted, where each track segment's duration is attributed to the start locations. For each day the total tracked time is calculated and provided in the output, so that it must not be based on 24 h, if there are large (e.g. night) gaps in the data the timelags of which can be adapted beforehand with the Adapt/Filter Unrealistic Values App. 
 
 For each calender date average proportion and duration is calcualted, where n.pts indicates that number of tracks providing data for this date. Two final rows indicate the overall mean and standard deviations of proportion and duration with n.pts indicating the number of individual days where percentages were calculated.
 
@@ -40,7 +40,6 @@ moveStack in Movebank format
 
 `midnight_adapt`: hours that your time zone deviates from UTC. Examples: for UTC+2 insert 2, for UTC-6 insert -6.
 
-`last_loctime`: Select this option if your data were collected with a regular daily gap (e.g. no locations at night). This leads the App to calculate cumulative durations of the adapted `timelag2` that is weighting the last location before the gap with the median data resolution instead of the long gap time interval. Depending on your required data property and how the animal(s) behave during the gap (e.g. night) either one or the other might be sensible. Note that (in addition to the Time Lag Between Locations App) you need to add the Adapt Time Lag for Regular Gaps App to your workflow before, if you want to use this feature.
 
 ### Null or error handling:
 **Parameter `variab`:** If there is no individual variable with the name given here, an error will be returned.
