@@ -5,7 +5,7 @@ MoveApps
 Github repository: *github.com/movestore/Daily-Proportions*
 
 ## Description
-Filters your data according to a selected attribute and value and returns the daily number and cumulative duration of locations fulfilling this property. Can be adapted for local time zone.
+Filters your data according to a selected attribute and value and returns the daily number and cumulative duration of locations fulfilling this property. Can be adapted for local time zone. It is necessary to include the Time Lag Between Locations App before this App in the workflow.
 
 ## Documentation
 This App first marks all locations that fulfill a user defined property (e.g. ground speed > 10 m/s). Then it extracts the number of locations per day and track that this property is fulfilled. Sample sizes per day are added.
