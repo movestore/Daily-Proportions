@@ -29,27 +29,27 @@ moveStack in Movebank format
 
 `Daily_Proportions.pdf`: timelines of numbers and cumulative duraitons of locations that fulfill the required property by individual and averages as last plot.
 
-### Parameters 
-`variab`: Name of the required data attribute. Take care that this parameter also exists in the Track Attributes of the input data set.
+### Settings
+**Data Attribute (`variab`):** Name of the required data attribute. Take care that this parameter also exists in the Track Attributes of the input data set.
 
-`rel`: By this parameter the relation in the required property has to be selected. The possible values differ by parameter data type, only numeric and timestamps variables can relate by '==', '>' or '<'.
+**Selection Relation (`rel`):** By this parameter the relation in the required property has to be selected. The possible values differ by parameter data type, only numeric and timestamps variables can relate by '==', '>' or '<'.
 
-`valu`: Value of the relation that the data set has to fullfill. In case of `rel` = 'is one of the following' commas have to be used to separate the possible values. In case of a timestamp parameter please use the timestamp format with year, month, day, hour, minute and second as in the example: '2021-06-23 09:34:00"
+**Selection Value (`valu`):** Value of the relation that the data set has to fullfill. In case of `rel` = 'is one of the following' commas have to be used to separate the possible values. In case of a timestamp parameter please use the timestamp format with year, month, day, hour, minute and second as in the example: '2021-06-23 09:34:00"
 
-`time`: Please tick this parameter if your selected variable is a timestamp type, so that the App can properly work with it.
+**Time variable? (`time`):** Please tick this parameter if your selected variable is a timestamp type, so that the App can properly work with it.
 
-`midnight_adapt`: hours that your time zone deviates from UTC. Examples: for UTC+2 insert 2, for UTC-6 insert -6.
+**Time zone day adaptation (`midnight_adapt`):** hours that your time zone deviates from UTC. Examples: for UTC+2 insert 2, for UTC-6 insert -6.
 
 
 ### Null or error handling:
-**Parameter `variab`:** If there is no individual variable with the name given here, an error will be returned.
+**Setting `variab`:** If there is no individual variable with the name given here, an error will be returned.
 
-**Parameter `rel`:** If none of the relation options are selected, an error will be returned. It has to be carefully considered that the selected relation fits with the data type of the selected variable. Only numeric and timestamps variables can relate by '==', '>' or '<'.
+**Setting `rel`:** If none of the relation options are selected, an error will be returned. It has to be carefully considered that the selected relation fits with the data type of the selected variable. Only numeric and timestamps variables can relate by '==', '>' or '<'.
 
-**Parameter `valu`:** If there is no value entered, an error will be returned. The data type of the entered value has to fit with the selected variable.
+**Setting `valu`:** If there is no value entered, an error will be returned. The data type of the entered value has to fit with the selected variable.
 
-**Parameter `time`:** If the selected variable is a timestamp and it was not indicated here, the variable will be treated as a string of text and possibly not handled correctly, leading to errors. Similarly if your variable is not a timestamp and it is indicated here. Default is 'false'.
+**Setting `time`:** If the selected variable is a timestamp and it was not indicated here, the variable will be treated as a string of text and possibly not handled correctly, leading to errors. Similarly if your variable is not a timestamp and it is indicated here. Default is 'false'.
 
-**Parameter `midnight_adapt`:** Values must be between -12 and 12. If other numbers are entered, the dates are shifted further than appropriate and results become difficult to interpret.
+**Setting `midnight_adapt`:** Values must be between -12 and 12. If other numbers are entered, the dates are shifted further than appropriate and results become difficult to interpret.
 
 **Data:** The full data set is returned.
